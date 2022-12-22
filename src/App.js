@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import Moveable from "react-moveable";
+import API from './API'
 
-export default const App = () => {
+const App = () => {
   const [moveableComponents, setMoveableComponents] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -56,8 +57,9 @@ export default const App = () => {
 
   return (
     <main style={{ height : "100vh", width: "100vw" }}>
-      <button onClick={addMoveable}>Add Moveable1</button>
+      <button onClick={ addMoveable }>Add Moveable1</button>
       <div
+        
         id="parent"
         style={{
           position: "relative",
@@ -96,7 +98,8 @@ const Component = ({
   isSelected = false,
   updateEnd,
 }) => {
-  const ref = useRef();
+  const containerRef = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLElement>(null);
 
   const [nodoReferencia, setNodoReferencia] = useState({
     top,
@@ -108,9 +111,27 @@ const Component = ({
     id,
   });
 
+
+
   let parent = document.getElementById("parent");
   let parentBounds = parent?.getBoundingClientRect();
+  /* const childPos  = document.getElementById('child-' + id).getBoundingClientRect();
+  const relativePos = {
+    top: childPos.top - parentBounds.top,
+    left: childPos.left - parentBounds.left,
+    width: childPos.width,
+    height: childPos.height,
+  }; */
   
+  /* const moveable = new Moveable(document.body, {
+    draggable: true,
+    edgeDraggable: false,
+   });
+   
+   moveable.edgeDraggable = true;
+ */
+
+
   const onResize = async (e) => {
     // ACTUALIZAR ALTO Y ANCHO
     let newWidth = e.width;
@@ -189,7 +210,7 @@ const Component = ({
       <div
         ref={ref}
         className="draggable"
-        id={"component-" + id}
+        id={"child-" + id}
         style={{
           position: "absolute",
           top: top,

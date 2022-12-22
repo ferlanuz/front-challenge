@@ -1,6 +1,12 @@
 import fetch from "node-fetch";
 
-import {
-  app,
-  BrowserWindow,
-  Menu,
+
+const getImage = fetch(
+   ' https://jsonplaceholder.typicode.com/photos',
+   method: 'GET',
+   headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data) 
+) 
+export default API
